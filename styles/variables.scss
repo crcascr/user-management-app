@@ -1,0 +1,29 @@
+// Colores personalizados
+$primary-color: #1976d2;
+$secondary-color: #424242;
+$accent-color: #82b1ff;
+$success-color: #4caf50;
+$warning-color: #ffc107;
+$error-color: #ff5252;
+
+// Espaciado
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+
+// Breakpoints
+$mobile: 600px;
+$tablet: 960px;
+$desktop: 1264px;
+
+// Transiciones
+$transition-fast: 0.15s ease-in-out;
+$transition-normal: 0.3s ease-in-out;
+$transition-slow: 0.5s ease-in-out;
+
+// Sombras
+$shadow-light: 0 2px 4px rgba(0, 0, 0, 0.1);
+$shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.15);
+$shadow-heavy: 0 8px 16px rgba(0, 0, 0, 0.2);
