@@ -64,7 +64,7 @@
 <script setup lang="ts">
 import type { User } from '@/interfaces'
 import { computed } from 'vue'
-import UserCard from './UserCard.vue'
+import UserCard from '@/components/UserCard.vue'
 
 // Props
 interface Props {
