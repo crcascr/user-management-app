@@ -31,7 +31,7 @@
         :color="hasResults ? 'success' : 'warning'"
         variant="tonal"
         size="small"
-        class="result-chip"
+        class="results-chip"
       >
         <template #prepend>
           <v-icon size="16">
@@ -44,7 +44,7 @@
   </v-card>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { computed, watch } from 'vue'
 
 // Props
@@ -77,31 +77,34 @@ const searchQuery = computed({
   get: () => props.modelValue,
   set: (value: string) => emit('update:modelValue', value || ''),
 })
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
 const hasResults = computed(() => props.resultCount > 0)
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
 const resultsText = computed(() => {
   if (!searchQuery.value) return ''
 
-  if (props.resultCount === 0) return 'Sin resultados'
-  if (props.resultCount === 1) return '1 usuario encontrado'
-  return `${props.resultCount} usuarios encontrados`
+  if (props.resultCount === 0) {
+    return 'Sin resultados'
+  } else if (props.resultCount === 1) {
+    return '1 usuario encontrado'
+  } else {
+    return `${props.resultCount} usuarios encontrados`
+  }
 })
 
 // Methods
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const handleSearch = (event: Event) => {
   const target = event.target as HTMLInputElement
   emit('search', target.value || '')
 }
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
 const handleClear = () => {
   emit('clear')
 }
 
 // Watchers
 watch(
-  () => searchQuery.value,
+  () => props.modelValue,
   (newValue) => {
     if (!newValue) {
       emit('clear')
