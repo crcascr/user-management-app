@@ -134,8 +134,8 @@ const handleViewMore = () => {
 
   &__badge {
     position: absolute;
-    top: -8px;
-    right: -8px;
+    top: 8px;
+    right: 4px;
   }
 
   &__info {
