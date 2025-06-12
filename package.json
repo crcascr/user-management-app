@@ -1,8 +1,10 @@
 {
   "name": "user-management-app",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
+  "description": "SPA de usuarios desarrollada con Vue 3, TypeScript y Vuetify 3",
+  "author": "Cristian Castillo",
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
@@ -36,5 +38,13 @@
     "vite": "^6.2.4",
     "vite-plugin-vue-devtools": "^7.7.2",
     "vue-tsc": "^2.2.8"
-  }
+  },
+  "keywords": [
+    "vue3",
+    "typescript",
+    "vite",
+    "vuetify3",
+    "spa",
+    "user-management"
+  ]
 }
