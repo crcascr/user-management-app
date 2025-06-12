@@ -1,66 +1,3 @@
-<template>
-  <div class="user-list">
-    <template v-if="loading">
-      <v-row>
-        <v-col v-for="i in skeletonCount" :key="`skeleton-${i}`" cols="12" sm="6" md="4" lg="3">
-          <v-card class="user-skeleton" elevation="2">
-            <v-card-text class="pa-4">
-              <div class="d-flex align-start ga-4">
-                <v-skeleton-loader type="avatar" />
-                <div class="flex-grow-1">
-                  <v-skeleton-loader type="heading" />
-                  <v-skeleton-loader type="text" class="mt-2" />
-                  <v-skeleton-loader type="text" width="60%" />
-                </div>
-              </div>
-            </v-card-text>
-            <v-card-actions class="pa-4 pt-0">
-              <v-spacer />
-              <v-skeleton-loader type="button" />
-            </v-card-actions>
-          </v-card>
-        </v-col>
-      </v-row>
-    </template>
-    <template v-else-if="users.length > 0">
-      <transition-group name="user-list" tag="div" class="user-grid">
-        <v-col
-          v-for="user in users"
-          :key="user.id"
-          cols="12"
-          sm="6"
-          md="4"
-          lg="3"
-          class="user-grid__item"
-        >
-          <UserCard :user="user" @view-more="handleViewMore" @click="handleUserClick" />
-        </v-col>
-      </transition-group>
-    </template>
-
-    <template v-else>
-      <v-card class="empty-state" elevation="1">
-        <v-card-text class="text-center pa-8">
-          <v-icon size="80" color="grey-lighten-1" class="mb-4">{{ emptyIcons }}</v-icon>
-          <h3 class="text-h6 text-medium-emphasis mb-2">{{ emptyTitle }}</h3>
-          <p class="text-body-2 text-medium-emphasis mb-4">{{ emptyMessage }}</p>
-          <v-btn
-            v-if="showRetryButton"
-            color="primary"
-            variant="elevated"
-            size="small"
-            @click="handleRetry"
-          >
-            <template #prepend>
-              <v-icon>mdi-refresh</v-icon>
-            </template>
-          </v-btn>
-        </v-card-text>
-      </v-card>
-    </template>
-  </div>
-</template>
-
 <script setup lang="ts">
 import type { User } from '@/interfaces'
 import { computed } from 'vue'
@@ -127,6 +64,69 @@ const handleRetry = () => {
   emit('retry')
 }
 </script>
+
+<template>
+  <div class="user-list">
+    <template v-if="loading">
+      <v-row>
+        <v-col v-for="i in skeletonCount" :key="`skeleton-${i}`" cols="12" sm="6" md="4" lg="3">
+          <v-card class="user-skeleton" elevation="2">
+            <v-card-text class="pa-4">
+              <div class="d-flex align-start ga-4">
+                <v-skeleton-loader type="avatar" />
+                <div class="flex-grow-1">
+                  <v-skeleton-loader type="heading" />
+                  <v-skeleton-loader type="text" class="mt-2" />
+                  <v-skeleton-loader type="text" width="60%" />
+                </div>
+              </div>
+            </v-card-text>
+            <v-card-actions class="pa-4 pt-0">
+              <v-spacer />
+              <v-skeleton-loader type="button" />
+            </v-card-actions>
+          </v-card>
+        </v-col>
+      </v-row>
+    </template>
+    <template v-else-if="users.length > 0">
+      <transition-group name="user-list" tag="div" class="user-grid">
+        <v-col
+          v-for="user in users"
+          :key="user.id"
+          cols="12"
+          sm="6"
+          md="4"
+          lg="3"
+          class="user-grid__item"
+        >
+          <UserCard :user="user" @view-more="handleViewMore" @click="handleUserClick" />
+        </v-col>
+      </transition-group>
+    </template>
+
+    <template v-else>
+      <v-card class="empty-state" elevation="1">
+        <v-card-text class="text-center pa-8">
+          <v-icon size="80" color="grey-lighten-1" class="mb-4">{{ emptyIcons }}</v-icon>
+          <h3 class="text-h6 text-medium-emphasis mb-2">{{ emptyTitle }}</h3>
+          <p class="text-body-2 text-medium-emphasis mb-4">{{ emptyMessage }}</p>
+          <v-btn
+            v-if="showRetryButton"
+            color="primary"
+            variant="elevated"
+            size="small"
+            @click="handleRetry"
+          >
+            <template #prepend>
+              <v-icon>mdi-refresh</v-icon>
+            </template>
+          </v-btn>
+        </v-card-text>
+      </v-card>
+    </template>
+  </div>
+</template>
 
 <style lang="scss" scoped>
 .user-list {

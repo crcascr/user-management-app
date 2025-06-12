@@ -1,3 +1,54 @@
+<script setup lang="ts">
+import type { User } from '@/interfaces'
+import { UserService } from '@/services'
+import { computed } from 'vue'
+
+// Props
+interface Props {
+  modelValue: boolean
+  user: (User & { avatar: string }) | null
+  loading?: boolean
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  loading: false,
+})
+
+// Emits
+interface Emits {
+  'update:modelValue': [value: boolean]
+  close: []
+}
+
+const emit = defineEmits<Emits>()
+
+// Computed
+const mapsUrl = computed(() => {
+  if (!props.user?.address) return '#'
+
+  const { address } = props.user
+
+  const query = encodeURIComponent(
+    `${address.street}, ${address.suite}, ${address.city} ${address.zipcode}`,
+  )
+  return `https://www.google.com/maps/search/?api=1&query=${query}`
+})
+
+// Methods
+const handleClose = () => {
+  emit('update:modelValue', false)
+  emit('close')
+}
+
+const formatPhone = (phone: string) => {
+  return UserService.formatPhone(phone)
+}
+
+const formatWebsite = (website: string) => {
+  return website.startsWith('http') ? website : `http://${website}`
+}
+</script>
+
 <template>
   <v-dialog
     :model-value="modelValue"
@@ -167,57 +218,6 @@
     </v-card>
   </v-dialog>
 </template>
-
-<script setup lang="ts">
-import type { User } from '@/interfaces'
-import { UserService } from '@/services'
-import { computed } from 'vue'
-
-// Props
-interface Props {
-  modelValue: boolean
-  user: (User & { avatar: string }) | null
-  loading?: boolean
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  loading: false,
-})
-
-// Emits
-interface Emits {
-  'update:modelValue': [value: boolean]
-  close: []
-}
-
-const emit = defineEmits<Emits>()
-
-// Computed
-const mapsUrl = computed(() => {
-  if (!props.user?.address) return '#'
-
-  const { address } = props.user
-
-  const query = encodeURIComponent(
-    `${address.street}, ${address.suite}, ${address.city} ${address.zipcode}`,
-  )
-  return `https://www.google.com/maps/search/?api=1&query=${query}`
-})
-
-// Methods
-const handleClose = () => {
-  emit('update:modelValue', false)
-  emit('close')
-}
-
-const formatPhone = (phone: string) => {
-  return UserService.formatPhone(phone)
-}
-
-const formatWebsite = (website: string) => {
-  return website.startsWith('http') ? website : `http://${website}`
-}
-</script>
 
 <style lang="scss" scoped>
 .user-modal {

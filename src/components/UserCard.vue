@@ -1,3 +1,44 @@
+<script setup lang="ts">
+import type { User } from '@/interfaces'
+import { computed } from 'vue'
+
+// Props
+interface Props {
+  user: User & { avatar: string }
+  loading?: boolean
+  compact?: boolean
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  loading: false,
+  compact: false,
+})
+
+// Emits
+interface Emits {
+  'view-more': [user: Props['user']]
+  click: [user: Props['user']]
+}
+
+const emit = defineEmits<Emits>()
+
+// Computed
+const avatarSize = computed(() => (props.compact ? 48 : 64))
+
+// Methods
+const handleClick = () => {
+  if (!props.loading) {
+    emit('click', props.user)
+  }
+}
+
+const handleViewMore = () => {
+  if (!props.loading) {
+    emit('view-more', props.user)
+  }
+}
+</script>
+
 <template>
   <v-card
     class="user-card"
@@ -53,47 +94,6 @@
     </v-overlay>
   </v-card>
 </template>
-
-<script setup lang="ts">
-import type { User } from '@/interfaces'
-import { computed } from 'vue'
-
-// Props
-interface Props {
-  user: User & { avatar: string }
-  loading?: boolean
-  compact?: boolean
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  loading: false,
-  compact: false,
-})
-
-// Emits
-interface Emits {
-  'view-more': [user: Props['user']]
-  click: [user: Props['user']]
-}
-
-const emit = defineEmits<Emits>()
-
-// Computed
-const avatarSize = computed(() => (props.compact ? 48 : 64))
-
-// Methods
-const handleClick = () => {
-  if (!props.loading) {
-    emit('click', props.user)
-  }
-}
-
-const handleViewMore = () => {
-  if (!props.loading) {
-    emit('view-more', props.user)
-  }
-}
-</script>
 
 <style lang="scss" scoped>
 .user-card {

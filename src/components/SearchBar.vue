@@ -1,49 +1,3 @@
-<template>
-  <v-card class="search-bar-card" elevation="2">
-    <v-card-text class="pb-2">
-      <v-text-field
-        v-model="searchQuery"
-        :loading="loading"
-        :disabled="disabled"
-        prepend-inner-icon="mdi-magnify"
-        label="Buscar usuarios..."
-        placeholder="Nombre, usuario o email"
-        variant="outlined"
-        density="comfortable"
-        clearable
-        hide-details
-        class="search-input"
-        @input="handleSearch"
-        @click:clear="handleClear"
-      >
-        <template #append-inner>
-          <v-fade-transition>
-            <v-icon v-if="searchQuery" :color="hasResults ? 'success' : 'warning'" size="small">
-              {{ hasResults ? 'mdi-check-circle' : 'mdi-alert-circle' }}
-            </v-icon>
-          </v-fade-transition>
-        </template>
-      </v-text-field>
-    </v-card-text>
-
-    <v-card-text v-if="searchQuery && !loading" class="pt-0">
-      <v-chip
-        :color="hasResults ? 'success' : 'warning'"
-        variant="tonal"
-        size="small"
-        class="results-chip"
-      >
-        <template #prepend>
-          <v-icon size="16">
-            {{ hasResults ? 'mdi-account-check' : 'mdi-account-search' }}
-          </v-icon>
-        </template>
-        {{ resultsText }}
-      </v-chip>
-    </v-card-text>
-  </v-card>
-</template>
-
 <script setup lang="ts">
 import { computed, watch } from 'vue'
 
@@ -112,6 +66,52 @@ watch(
   },
 )
 </script>
+
+<template>
+  <v-card class="search-bar-card" elevation="2">
+    <v-card-text class="pb-2">
+      <v-text-field
+        v-model="searchQuery"
+        :loading="loading"
+        :disabled="disabled"
+        prepend-inner-icon="mdi-magnify"
+        label="Buscar usuarios..."
+        placeholder="Nombre, usuario o email"
+        variant="outlined"
+        density="comfortable"
+        clearable
+        hide-details
+        class="search-input"
+        @input="handleSearch"
+        @click:clear="handleClear"
+      >
+        <template #append-inner>
+          <v-fade-transition>
+            <v-icon v-if="searchQuery" :color="hasResults ? 'success' : 'warning'" size="small">
+              {{ hasResults ? 'mdi-check-circle' : 'mdi-alert-circle' }}
+            </v-icon>
+          </v-fade-transition>
+        </template>
+      </v-text-field>
+    </v-card-text>
+
+    <v-card-text v-if="searchQuery && !loading" class="pt-0">
+      <v-chip
+        :color="hasResults ? 'success' : 'warning'"
+        variant="tonal"
+        size="small"
+        class="results-chip"
+      >
+        <template #prepend>
+          <v-icon size="16">
+            {{ hasResults ? 'mdi-account-check' : 'mdi-account-search' }}
+          </v-icon>
+        </template>
+        {{ resultsText }}
+      </v-chip>
+    </v-card-text>
+  </v-card>
+</template>
 
 <style lang="scss" scoped>
 .search-bar-card {
