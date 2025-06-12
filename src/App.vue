@@ -32,7 +32,7 @@ const toggleTheme = () => {
     <v-app-bar elevation="2" color="primary" dark app>
       <v-app-bar-title class="app-title">
         <v-icon class="mr-2" size="28">mdi-account-group</v-icon>
-        <span class="font-weight-bold">User Manager</span>
+        <span class="font-weight-bold">Gestión de Usuarios</span>
       </v-app-bar-title>
       <v-spacer />
 
