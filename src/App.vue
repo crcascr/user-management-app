@@ -53,7 +53,7 @@ const toggleTheme = () => {
     </v-main>
 
     <!-- Footer -->
-    <v-footer color="grey-lighten-3" class="text-center pa-6">
+    <v-footer class="text-center pa-6">
       <div class="footer-content">
         <p class="text-body-2 text-medium-emphasis mb-3">
           Desarrollado con ❤️ por
@@ -193,12 +193,38 @@ const toggleTheme = () => {
   display: flex;
   align-items: center;
   font-size: 1.25rem;
+  color: #ffffff;
 }
 
 .footer-content {
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
+
+  // Texto del footer
+  :deep(.v-theme--light) & {
+    color: #666;
+  }
+
+  :deep(.v-theme--dark) & {
+    color: #ccc;
+  }
+
+  a {
+    text-decoration: none;
+
+    :deep(.v-theme--dark) & {
+      color: #90caf9;
+    }
+
+    :deep(.v-theme--light) & {
+      color: $primary-color;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 .footer-links {
@@ -206,6 +232,18 @@ const toggleTheme = () => {
   justify-content: center;
   flex-wrap: wrap;
   gap: $spacing-xs;
+
+  .v-chip {
+    :deep(.v-theme--dark) & {
+      border-color: rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+
+    :deep(.v-theme--light) & {
+      border-color: rgba(0, 0, 0, 0.1);
+      color: #1e1e1e;
+    }
+  }
 }
 
 // Responsive adjustments

@@ -70,7 +70,7 @@ const formatWebsite = (website: string) => {
           </v-avatar>
           <div class="user-modal__title-section">
             <h2 class="text-h5 font-weight-bold">{{ user?.name || 'Cargando...' }}</h2>
-            <p class="text-body-2 text-medium-emphasis ma-0">@{{ user?.username || '...' }}</p>
+            <p class="text-body-2 ma-0">@{{ user?.username || '...' }}</p>
           </div>
         </div>
         <v-btn icon variant="text" size="small" :disabled="loading" @click="handleClose">
@@ -231,9 +231,16 @@ const formatWebsite = (website: string) => {
   &__header {
     display: flex;
     justify-content: space-between;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
     padding: $spacing-lg;
+    color: white;
+
+    :deep(.v-theme--light) & {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    :deep(.v-theme--dark) & {
+      background: linear-gradient(135deg, #2c3e50 0%, #4a148c 100%);
+    }
 
     &-content {
       display: flex;
@@ -252,8 +259,15 @@ const formatWebsite = (website: string) => {
     flex: 1;
 
     h2 {
-      color: white;
       margin-bottom: $spacing-xs;
+
+      :deep(.v-theme--light) & {
+        color: white;
+      }
+
+      :deep(.v-theme--dark) & {
+        color: #ffffff;
+      }
     }
   }
 
@@ -261,6 +275,16 @@ const formatWebsite = (website: string) => {
     padding: $spacing-lg;
     max-height: 60vh;
     overflow-y: auto;
+
+    :deep(.v-theme--light) & {
+      background-color: #ffffff;
+      color: #1e1e1e;
+    }
+
+    :deep(.v-theme--dark) & {
+      background-color: #1e1e1e;
+      color: #f5f5f5;
+    }
   }
 
   &__loading {
@@ -278,6 +302,14 @@ const formatWebsite = (website: string) => {
       display: flex;
       align-items: center;
       font-weight: 600;
+
+      :deep(.v-theme--dark) & {
+        color: #f5f5f5;
+      }
+
+      :deep(.v-theme--light) & {
+        color: #1e1e1e;
+      }
     }
   }
 
@@ -289,8 +321,16 @@ const formatWebsite = (website: string) => {
       margin-bottom: $spacing-xs;
       transition: background-color $transition-fast;
 
-      &:hover {
-        background-color: rgba(0, 0, 0, 0.04);
+      :deep(.v-theme--light) & {
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.04);
+        }
+      }
+
+      :deep(.v-theme--dark) & {
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.05);
+        }
       }
 
       &:last-child {
@@ -303,6 +343,14 @@ const formatWebsite = (website: string) => {
   &__company-card {
     border-radius: 12px;
     transition: transform $transition-fast;
+
+    :deep(.v-theme--light) & {
+      background-color: #f9f9f9;
+    }
+
+    :deep(.v-theme--dark) & {
+      background-color: #2a2a2a;
+    }
 
     &:hover {
       transform: translateY(-2px);
@@ -317,7 +365,14 @@ const formatWebsite = (website: string) => {
 
   &__actions {
     padding: $spacing-md $spacing-lg;
-    background-color: #fafafa;
+
+    :deep(.v-theme--light) & {
+      background-color: #fafafa;
+    }
+
+    :deep(.v-theme--dark) & {
+      background-color: #222;
+    }
   }
 }
 

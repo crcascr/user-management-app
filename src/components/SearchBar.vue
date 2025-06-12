@@ -69,14 +69,13 @@ watch(
 
 <template>
   <v-card class="search-bar-card" elevation="2">
-    <v-card-text class="pb-2">
+    <v-card-text>
       <v-text-field
         v-model="searchQuery"
         :loading="loading"
         :disabled="disabled"
         prepend-inner-icon="mdi-magnify"
         label="Buscar usuarios..."
-        placeholder="Nombre, usuario o email"
         variant="outlined"
         density="comfortable"
         clearable
@@ -115,25 +114,62 @@ watch(
 
 <style lang="scss" scoped>
 .search-bar-card {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
   margin-bottom: $spacing-lg;
+  border-radius: 16px;
 
-  :deep(.v-field) {
-    background-color: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
+  .v-theme--light & {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #1e1e1e;
+
+    .v-field {
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+    }
+
+    .v-field--focused {
+      background-color: white;
+    }
+
+    .v-field__input {
+      color: #1e1e1e;
+    }
+
+    .v-label {
+      color: rgba(0, 0, 0, 0.6);
+    }
+
+    .v-field__prepend-inner {
+      color: #666;
+    }
   }
 
-  :deep(.v-field--focused) {
-    background-color: white;
-  }
+  // Tema oscuro
+  .v-theme--dark & {
+    background: linear-gradient(135deg, #2c3e50 0%, #4a148c 100%);
+    color: white;
 
-  :deep(.v-field__input) {
-    color: #333;
-  }
+    .v-field {
+      background-color: rgba(30, 30, 30, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+    }
 
-  :deep(.v-field__prepend-inner) {
-    color: #666;
+    .v-field--focused {
+      background-color: #2e2e2e;
+    }
+
+    .v-field__input {
+      color: #ffffff;
+    }
+
+    .v-label {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .v-field__prepend-inner {
+      color: rgba(255, 255, 255, 0.5);
+    }
   }
 }
 

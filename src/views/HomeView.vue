@@ -129,7 +129,6 @@ onMounted(() => {
         v-show="!loading && users.length > 0"
         icon
         size="large"
-        color="primary"
         class="fab-refresh"
         @click="handleRefresh"
       >
@@ -142,7 +141,16 @@ onMounted(() => {
 <style lang="scss" scoped>
 .home-view {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+
+  // Tema claro
+  :deep(.v-theme--light) & {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  }
+
+  // Tema oscuro
+  :deep(.v-theme--dark) & {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+  }
 }
 
 .home-header {
@@ -157,7 +165,6 @@ onMounted(() => {
     h1 {
       font-size: 2.5rem;
       font-weight: 700;
-      color: #2c3e50;
       margin-bottom: $spacing-sm;
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       -webkit-background-clip: text;
@@ -167,8 +174,15 @@ onMounted(() => {
 
     p {
       font-size: 1.1rem;
-      color: #7f8c8d;
       margin: 0;
+    }
+
+    :deep(.v-theme--light) & p {
+      color: #7f8c8d;
+    }
+
+    :deep(.v-theme--dark) & p {
+      color: #b0bec5;
     }
   }
 
@@ -180,12 +194,21 @@ onMounted(() => {
 
 .stats-card {
   min-width: 120px;
-  background: white;
   border-radius: 16px;
   transition: transform $transition-normal;
 
   &:hover {
     transform: translateY(-4px);
+  }
+
+  :deep(.v-theme--light) {
+    background-color: white;
+    color: #1e1e1e;
+  }
+
+  :deep(.v-theme--dark) {
+    background-color: #2e2e2e;
+    color: #f5f5f5;
   }
 }
 
@@ -198,6 +221,24 @@ onMounted(() => {
 
   &:hover {
     transform: scale(1.1);
+  }
+
+  :deep(.v-theme--light) & {
+    background-color: $primary-color;
+    color: white;
+
+    .v-icon {
+      color: white;
+    }
+  }
+
+  :deep(.v-theme--dark) & {
+    background-color: #424242;
+    color: white;
+
+    .v-icon {
+      color: #ffffff;
+    }
   }
 }
 

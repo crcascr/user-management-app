@@ -101,6 +101,7 @@ const handleViewMore = () => {
   transition: all $transition-normal;
   position: relative;
   overflow: hidden;
+  border-radius: 12px;
 
   &:hover {
     transform: translateY(-4px);
@@ -130,6 +131,14 @@ const handleViewMore = () => {
     transition: transform $transition-normal;
     border: 3px solid white;
     box-shadow: $shadow-medium;
+
+    :deep(.v-theme--dark) & {
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    :deep(.v-theme--light) & {
+      border-color: white;
+    }
   }
 
   &__badge {
@@ -145,30 +154,55 @@ const handleViewMore = () => {
 
   &__name {
     font-weight: 600;
-    color: #1a1a1a;
     margin-bottom: $spacing-xs;
     line-height: 1.3;
+
+    :deep(.v-theme--light) & {
+      color: #1a1a1a;
+    }
+
+    :deep(.v-theme--dark) & {
+      color: #f5f5f5;
+    }
   }
 
   &__username {
-    color: #666;
     margin-bottom: $spacing-sm;
+
+    :deep(.v-theme--light) & {
+      color: #666;
+    }
+
+    :deep(.v-theme--dark) & {
+      color: #b0bec5;
+    }
   }
 
   &__email {
     display: flex;
     align-items: center;
-    color: #555;
     min-width: 0;
 
     span {
       min-width: 0;
+    }
+
+    :deep(.v-theme--light) & {
+      color: #555;
+    }
+
+    :deep(.v-theme--dark) & {
+      color: #cfd8dc;
     }
   }
 
   &__overlay {
     background-color: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(2px);
+
+    :deep(.v-theme--dark) & {
+      background-color: rgba(0, 0, 0, 0.5);
+    }
   }
 }
 
