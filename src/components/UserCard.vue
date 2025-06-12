@@ -67,7 +67,7 @@ const handleViewMore = () => {
           <p class="user-card__username text-body-2 text-medium-emphasis">@{{ user.username }}</p>
           <div class="user-card__email">
             <v-icon size="16" class="mr-2">mdi-email</v-icon>
-            <span class="text-body-2">{{ user.email }}</span>
+            <span class="text-body-2 text-lowercase">{{ user.email }}</span>
           </div>
         </div>
       </div>

@@ -24,15 +24,16 @@ const emit = defineEmits<Emits>()
 
 // Computed
 const mapsUrl = computed(() => {
-  if (!props.user?.address) return '#'
+  const geo = props.user?.address?.geo
+  if (!geo?.lat || !geo?.lng) return '#'
 
-  const { address } = props.user
-
-  const query = encodeURIComponent(
-    `${address.street}, ${address.suite}, ${address.city} ${address.zipcode}`,
-  )
-  return `https://www.google.com/maps/search/?api=1&query=${query}`
+  return `https://www.google.com/maps/search/?api=1&query=${geo.lat},${geo.lng}`
 })
+
+const formatSector = (sector: string) => {
+  const sectors = sector.split(' ')
+  return sectors.map((s) => s.charAt(0).toUpperCase() + s.slice(1)).join(', ')
+}
 
 // Methods
 const handleClose = () => {
@@ -69,7 +70,7 @@ const formatWebsite = (website: string) => {
           </v-avatar>
           <div class="user-modal__title-section">
             <h2 class="text-h5 font-weight-bold">{{ user?.name || 'Cargando...' }}</h2>
-            <p class="text-body-2 text-medium-emphasis ma-0">{{ user?.username || '...' }}</p>
+            <p class="text-body-2 text-medium-emphasis ma-0">@{{ user?.username || '...' }}</p>
           </div>
         </div>
         <v-btn icon variant="text" size="small" :disabled="loading" @click="handleClose">
@@ -103,7 +104,9 @@ const formatWebsite = (website: string) => {
                   </template>
                   <v-list-item-title>Email</v-list-item-title>
                   <v-list-item-subtitle>
-                    <a :href="`mailto:${user.email}`" class="text-decoration-none text-primary"
+                    <a
+                      :href="`mailto:${user.email}`"
+                      class="text-decoration-none text-primary text-lowercase"
                       >{{ user.email }}
                     </a>
                   </v-list-item-subtitle>
@@ -187,9 +190,11 @@ const formatWebsite = (website: string) => {
                 <v-card-text>
                   <h4 class="text-h6 mb-2">{{ user.company.name }}</h4>
                   <p class="text-body-2 text-medium-emphasis mb-2">
-                    "{{ user.company.catchPhrase }}"
+                    "{{ formatSector(user.company.catchPhrase) }}"
                   </p>
-                  <p class="text-body-2"><strong>Sector:</strong> {{ user.company.bs }}</p>
+                  <p class="text-body-2">
+                    <strong>Sector:</strong> {{ formatSector(user.company.bs) }}
+                  </p>
                 </v-card-text>
               </v-card>
             </div>
@@ -207,10 +212,12 @@ const formatWebsite = (website: string) => {
           color="primary"
           variant="elevated"
           :disabled="loading"
-          @click="`mailto:${user.email}`"
+          :href="`mailto:${user.email}`"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           <template #prepend>
-            <v-icon>mdi-email-send</v-icon>
+            <v-icon>mdi-email-fast</v-icon>
           </template>
           Contactar
         </v-btn>
@@ -222,6 +229,8 @@ const formatWebsite = (website: string) => {
 <style lang="scss" scoped>
 .user-modal {
   &__header {
+    display: flex;
+    justify-content: space-between;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     padding: $spacing-lg;
