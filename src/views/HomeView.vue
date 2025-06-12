@@ -130,6 +130,7 @@ onMounted(() => {
         icon
         size="large"
         class="fab-refresh"
+        color="primary"
         @click="handleRefresh"
       >
         <v-icon>mdi-refresh</v-icon>
