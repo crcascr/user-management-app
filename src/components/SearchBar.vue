@@ -122,10 +122,10 @@ watch(
   :deep(.v-field) {
     background-color: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
+  }
 
-    &--focused {
-      background-color: white;
-    }
+  :deep(.v-field--focused) {
+    background-color: white;
   }
 
   :deep(.v-field__input) {

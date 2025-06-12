@@ -27,7 +27,7 @@ const toggleTheme = () => {
 </script>
 
 <template>
-  <vv-app>
+  <v-app>
     <!-- App bar -->
     <v-app-bar elevation="2" color="primary" dark app>
       <v-app-bar-title class="app-title">
@@ -185,7 +185,7 @@ const toggleTheme = () => {
         </v-btn>
       </template>
     </v-snackbar>
-  </vv-app>
+  </v-app>
 </template>
 
 <style lang="scss" scoped>

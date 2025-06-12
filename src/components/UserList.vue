@@ -69,7 +69,7 @@ const handleRetry = () => {
   <div class="user-list">
     <template v-if="loading">
       <v-row>
-        <v-col v-for="i in skeletonCount" :key="`skeleton-${i}`" cols="12" sm="6" md="4" lg="3">
+        <v-col v-for="i in skeletonCount" :key="`skeleton-${i}`" cols="12">
           <v-card class="user-skeleton" elevation="2">
             <v-card-text class="pa-4">
               <div class="d-flex align-start ga-4">
@@ -91,15 +91,7 @@ const handleRetry = () => {
     </template>
     <template v-else-if="users.length > 0">
       <transition-group name="user-list" tag="div" class="user-grid">
-        <v-col
-          v-for="user in users"
-          :key="user.id"
-          cols="12"
-          sm="6"
-          md="4"
-          lg="3"
-          class="user-grid__item"
-        >
+        <v-col v-for="user in users" :key="user.id" cols="12" class="user-grid__item">
           <UserCard :user="user" @view-more="handleViewMore" @click="handleUserClick" />
         </v-col>
       </transition-group>
@@ -135,7 +127,7 @@ const handleRetry = () => {
 
 .user-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
   gap: $spacing-lg;
 
   &__item {

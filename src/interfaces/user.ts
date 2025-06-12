@@ -24,6 +24,7 @@ export interface User {
   phone: string
   website: string
   company: Company
+  avatar: string
 }
 
 export interface UserCardData {
